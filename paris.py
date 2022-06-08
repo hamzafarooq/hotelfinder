@@ -48,13 +48,13 @@ def main():
       return summary_txt
 
 
-    gc = geonamescache.GeonamesCache()
-
-    # gets nested dictionary for countries
-    countries = gc.get_countries()
-
-    # gets nested dictionary for cities
-    cities = gc.get_cities()
+    # gc = geonamescache.GeonamesCache()
+    #
+    # # gets nested dictionary for countries
+    # countries = gc.get_countries()
+    #
+    # # gets nested dictionary for cities
+    # cities = gc.get_cities()
     # def gen_dict_extract(var, key):
     #     if isinstance(var, dict):
     #         for k, v in var.items():
