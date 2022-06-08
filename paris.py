@@ -20,7 +20,7 @@ from wordcloud import WordCloud
 from matplotlib import pyplot as plt
 import nltk
 nltk.download('stopwords')
-import geonamescache
+
 
 import os
 import streamlit as st
