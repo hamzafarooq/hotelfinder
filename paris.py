@@ -24,7 +24,7 @@ nltk.download('stopwords')
 
 import os
 import streamlit as st
-import utils as utl
+# import utils as utl
 from PIL import Image
 import time
 import torch
