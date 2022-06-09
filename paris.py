@@ -38,7 +38,7 @@ import numpy as np
 
 def main():
     # Settings
-    st.set_page_config(layout="wide", page_title='Paris Hotel Finder')
+    st.set_page_config(layout="wide", page_title='Paris Hotel Finder', page_icon="🎈"   )
     def bart_summarize(text, num_beams=20, length_penalty=2, max_length=2048, min_length=56, no_repeat_ngram_size=2):
 
       text = text.replace('\n','')
@@ -80,7 +80,14 @@ def main():
     import matplotlib.pyplot as plt
     #original_title = '<p style="font-family:IBM Mono; color:Blue; font-size: 20px;">Original image</p>'
     st.title("Parisian Hotel Finder")
+    with st.expander("ℹ️ - About this app", expanded=True):
 
+    st.write(
+        """
+-   The *BERT Keyword Extractor* app is an easy-to-use interface built in Streamlit for the amazing [KeyBERT](https://github.com/MaartenGr/KeyBERT) library from Maarten Grootendorst!
+-   It uses a minimal keyword extraction technique that leverages multiple NLP embeddings and relies on [Transformers] (https://huggingface.co/transformers/) 🤗 to create keywords/keyphrases that are most similar to a document.
+	    """
+    )
 
     stopwords=list(STOP_WORDS)
     stopwords.extend(['hotel','room','rooms'])
