@@ -189,7 +189,7 @@ def main():
         # No axis details
         #st.pyplot.axis("off");
     sampletext = 'e.g. Hotel near Eiffel Tower with big rooms'
-    userinput = st.text_input('Tell us what are you looking in your hotel?','e.g. Hotel near Eiffel Tower with big rooms')
+    userinput = st.text_input('Tell us what are you looking in your hotel?','e.g. Hotel near Eiffel Tower with big rooms',autocomplete="on")
     if not userinput or userinput == sampletext:
         st.write("Please enter a query to get results")
     else:
