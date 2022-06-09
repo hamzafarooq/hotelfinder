@@ -84,7 +84,7 @@ def main():
 
         st.write(
             """
-    -   This app allows you to search for hotels based on "what you're looking for" - it helps with reducing time to go through exhaustive reviews for each hotel!
+    -   This app allows you to search for hotels based on what you're looking for, rather than just city names - it helps with reducing time to go through exhaustive reviews for each hotel!
     -   It uses an innovative semantic search approach that leverages multiple NLP embeddings and relies on [Transformers] (https://huggingface.co/transformers/) 🤗.
     	    """
         )
