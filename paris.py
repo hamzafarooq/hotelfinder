@@ -188,7 +188,7 @@ def main():
         st.pyplot(wordcloud)
         # No axis details
         #st.pyplot.axis("off");
-    userinput = st.text_input('Tell us what are you looking in your hotel?')
+    userinput = st.text_input('Tell us what are you looking in your hotel?','e.g. Hotel near Eiffel Tower with big rooms')
     if not userinput:
         st.write("Please enter a query to get results")
     else:
