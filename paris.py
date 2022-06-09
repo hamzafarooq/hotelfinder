@@ -39,6 +39,7 @@ import numpy as np
 def main():
     # Settings
     st.set_page_config(layout="wide", page_title='Paris Hotel Finder', page_icon="🎈"   )
+    embedder = SentenceTransformer('all-MiniLM-L6-v2')
     def bart_summarize(text, num_beams=20, length_penalty=2, max_length=2048, min_length=56, no_repeat_ngram_size=2):
 
       text = text.replace('\n','')
@@ -102,7 +103,7 @@ def main():
     import torch
     #import os
 
-    embedder = SentenceTransformer('all-MiniLM-L6-v2')
+
 
     df_all = pd.read_csv('combined_paris.csv')
 
