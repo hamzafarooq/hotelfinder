@@ -39,7 +39,6 @@ import numpy as np
 def main():
     # Settings
     st.set_page_config(layout="wide", page_title='Paris Hotel Finder', page_icon="🎈"   )
-    embedder = SentenceTransformer('all-MiniLM-L6-v2')
     def bart_summarize(text, num_beams=20, length_penalty=2, max_length=2048, min_length=56, no_repeat_ngram_size=2):
 
       text = text.replace('\n','')
@@ -85,7 +84,7 @@ def main():
 
         st.write(
             """
-    -   This app allows you to search for hotels based on what you're looking for, rather than just city names - it helps with reducing time to go through exhaustive reviews for each hotel!
+    -   This app allows you to search for hotels based on what you're looking for, rather than just cities - it helps with reducing time to go through exhaustive reviews for each hotel!
     -   It uses an innovative semantic search approach that leverages multiple NLP embeddings and relies on [Transformers] (https://huggingface.co/transformers/) 🤗.
     	    """
         )
@@ -103,7 +102,7 @@ def main():
     import torch
     #import os
 
-
+    embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
     df_all = pd.read_csv('combined_paris.csv')
 
