@@ -84,8 +84,8 @@ def main():
 
         st.write(
             """
-    -   The *BERT Keyword Extractor* app is an easy-to-use interface built in Streamlit for the amazing [KeyBERT](https://github.com/MaartenGr/KeyBERT) library from Maarten Grootendorst!
-    -   It uses a minimal keyword extraction technique that leverages multiple NLP embeddings and relies on [Transformers] (https://huggingface.co/transformers/) 🤗 to create keywords/keyphrases that are most similar to a document.
+    -   This app allows you to search for hotels based on "what you're looking for" - it helps with reducing time to go through exhaustive reviews for each hotel!
+    -   It uses an innovative semantic search approach that leverages multiple NLP embeddings and relies on [Transformers] (https://huggingface.co/transformers/) 🤗.
     	    """
         )
 
