@@ -73,7 +73,7 @@ def main():
 
     from nltk.corpus import stopwords
 
-    stopwords = set(stopwords.words('english'))
+
     # mask = np.array(Image.open('upvote.png'))
 
     from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
@@ -89,8 +89,6 @@ def main():
     	    """
         )
 
-    stopwords=list(STOP_WORDS)
-    stopwords.extend(['hotel','room','rooms'])
     from string import punctuation
     punctuation=punctuation+ '\n'
 
@@ -104,6 +102,9 @@ def main():
     @st.cache(allow_output_mutation=True)
     def load_model():
         return SentenceTransformer('all-MiniLM-L6-v2')
+    stopwords = set(stopwords.words('english'))
+    stopwords=list(STOP_WORDS)
+    stopwords.extend(['hotel','room','rooms'])
 
     embedder = load_model()
     # embedder = SentenceTransformer('all-MiniLM-L6-v2')
