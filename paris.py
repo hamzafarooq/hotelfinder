@@ -101,8 +101,12 @@ def main():
     from sentence_transformers import SentenceTransformer, util
     import torch
     #import os
+    @st.cache(allow_output_mutation=True)
+    def load_model():
+        return SentenceTransformer('all-MiniLM-L6-v2')
 
-    embedder = SentenceTransformer('all-MiniLM-L6-v2')
+    embedder = load_model()
+    # embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
     df_all = pd.read_csv('combined_paris.csv')
 
