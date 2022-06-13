@@ -107,6 +107,10 @@ def main():
     df_all = pd.read_csv('combined_paris.csv')
 
     df_all = df_all[['Hotel','review']]
+
+
+    df_all = df_all.drop_duplicates()
+    df_all = df_all.reset_index(drop=True)
     summary_hotel = pd.read_csv('df_combined_paris.csv')
     #
     # df['hotel_name'].drop_duplicates()
@@ -141,6 +145,7 @@ def main():
     corpus = df_sentences_list
     # corpus_embeddings = embedder.encode(corpus,show_progress_bar=True)
     corpus_embeddings = np.load('embeddings.npy')
+    corpus_embeddings_h = np.load('embeddings_h_r.npy')
     #
     # model = SentenceTransformer('all-MiniLM-L6-v2')
     # paraphrases = util.paraphrase_mining(model, corpus)
@@ -264,8 +269,9 @@ def main():
             df_sentences_list_h = [str(d) for d in tqdm(df_sentences_list_h)]
             #
             corpus_h = df_sentences_list_h
-            corpus_embeddings_h = embedder.encode(corpus_h,show_progress_bar=True)
-            cos_scores_h = util.pytorch_cos_sim(query_embedding, corpus_embeddings_h)[0]
+            # corpus_embeddings_h = embedder.encode(corpus_h,show_progress_bar=True)
+            sublist = [element for i, element in enumerate(corpus_embeddings_h) if i in (df_all[df_all['Hotel'] == row_dict['Hotel'].values[0]].index.values)]
+            cos_scores_h = util.pytorch_cos_sim(query_embedding, sublist)[0]
             top_results_h = torch.topk(cos_scores_h, k=top_k)
 
             for score, idx in zip(top_results_h[0], top_results_h[1]):
