@@ -13,40 +13,71 @@ from collections import Counter
 from heapq import nlargest
 import os
 nlp = spacy.load("en_core_web_sm")
+
 from spacy import displacy
 import streamlit as st
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from matplotlib import pyplot as plt
+
 import nltk
-nltk.download('stopwords')
 
 
-import os
-import streamlit as st
+
+
+
 # import utils as utl
-from PIL import Image
+
 import time
 import torch
 import transformers
 from transformers import BartTokenizer, BartForConditionalGeneration
+from string import punctuation
 # tr = BartTokenizer.from_pretrained('facebook/bart-large-cnn')
-# mdl = BartForConditionalGeneration.from_pretrained('facebook/bart-large-cnn')
-torch_device = 'gpu'
+
 import numpy as np
+import pandas as pd
+from sentence_transformers import SentenceTransformer
+import scipy.spatial
+import pickle as pkl
+from sentence_transformers import SentenceTransformer, util
+import torch
+
 
 
 def main():
+
+
+
+
     # Settings
     st.set_page_config(layout="wide", page_title='Paris Hotel Finder', page_icon="🎈"   )
-    def bart_summarize(text, num_beams=20, length_penalty=2, max_length=2048, min_length=56, no_repeat_ngram_size=2):
+    from string import punctuation
+    punctuation=punctuation+ '\n'
 
-      text = text.replace('\n','')
-      text_input_ids = tr.batch_encode_plus([text], return_tensors='pt', max_length=1024)['input_ids'].to(torch_device)
-      summary_ids = mdl.generate(text_input_ids, num_beams=int(num_beams), length_penalty=float(length_penalty), max_length=int(max_length), min_length=int(min_length), no_repeat_ngram_size=int(no_repeat_ngram_size))
-      summary_txt = tr.decode(summary_ids.squeeze(), skip_special_tokens=True)
-      return summary_txt
+    # def bart_summarize(text, num_beams=20, length_penalty=2, max_length=2048, min_length=56, no_repeat_ngram_size=2):
+    #
+    #   text = text.replace('\n','')
+    #   text_input_ids = tr.batch_encode_plus([text], return_tensors='pt', max_length=1024)['input_ids'].to(torch_device)
+    #   summary_ids = mdl.generate(text_input_ids, num_beams=int(num_beams), length_penalty=float(length_penalty), max_length=int(max_length), min_length=int(min_length), no_repeat_ngram_size=int(no_repeat_ngram_size))
+    #   summary_txt = tr.decode(summary_ids.squeeze(), skip_special_tokens=True)
+    #   return summary_txt
 
+    from sentence_transformers import SentenceTransformer, util
+    import torch
+    import numpy as np
+    import pandas as pd
+    from sentence_transformers import SentenceTransformer
+    import scipy.spatial
+    import pickle as pkl
+    from sentence_transformers import SentenceTransformer, util
+    import torch
+    #import os
+    @st.cache(allow_output_mutation=True)
+    def load_model():
+        return SentenceTransformer('all-MiniLM-L6-v2')
+    embedder = load_model()
+    # embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
     # gc = geonamescache.GeonamesCache()
     #
@@ -71,13 +102,12 @@ def main():
     #
     # cities.append('New York')
 
-    from nltk.corpus import stopwords
+
 
 
     # mask = np.array(Image.open('upvote.png'))
 
-    from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
-    import matplotlib.pyplot as plt
+
     #original_title = '<p style="font-family:IBM Mono; color:Blue; font-size: 20px;">Original image</p>'
     st.title("Parisian Hotel Finder")
     with st.expander("ℹ️ - About this app", expanded=True):
@@ -89,24 +119,12 @@ def main():
     	    """
         )
 
-    from string import punctuation
+
     punctuation=punctuation+ '\n'
 
-    import pandas as pd
-    from sentence_transformers import SentenceTransformer
-    import scipy.spatial
-    import pickle as pkl
-    from sentence_transformers import SentenceTransformer, util
-    import torch
-    #import os
-    @st.cache(allow_output_mutation=True)
-    def load_model():
-        return SentenceTransformer('all-MiniLM-L6-v2')
-    stopwords = set(stopwords.words('english'))
-    stopwords=list(STOP_WORDS)
-    stopwords.extend(['hotel','room','rooms'])
 
-    embedder = load_model()
+    #import os
+
     # embedder = SentenceTransformer('all-MiniLM-L6-v2')
 
     df_all = pd.read_csv('combined_paris.csv')
