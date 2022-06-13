@@ -208,16 +208,16 @@ def main():
     else:
         query = [str(userinput)]
         doc = nlp(str(userinput))
-        for ent in doc.ents:
-            if ent.label_ == 'GPE':
-                if ent.text in countries:
-                    st.write(f"Country : {ent.text}")
-                elif ent.text in cities:
-                    st.write("city")
-                    st.write(ent.text)
-                    st.write(f"City : {ent.text}")
-                else:
-                    print(f"Other GPE : {ent.text}")
+        # for ent in doc.ents:
+        #     if ent.label_ == 'GPE':
+        #         if ent.text in countries:
+        #             st.write(f"Country : {ent.text}")
+        #         elif ent.text in cities:
+        #             st.write("city")
+        #             st.write(ent.text)
+        #             st.write(f"City : {ent.text}")
+        #         else:
+        #             print(f"Other GPE : {ent.text}")
         # query_embeddings = embedder.encode(queries,show_progress_bar=True)
         top_k = min(5, len(corpus))
 
@@ -244,14 +244,7 @@ def main():
 
             row_dict = df.loc[df['all_review']== corpus[idx]]
             st.subheader(row_dict['Hotel'].values[0])
-            # wordcloud = WordCloud( random_state=1, background_color='black', colormap='rainbow',  stopwords = stopwords).generate(corpus[idx])
-            # #wordcloud = WordCloud(collocations=False,stopwords=stopwords,background_color='black',max_words=35).generate(corpus[idx])
-            # fig, ax = plt.subplots()
-            # plt.imshow(wordcloud, interpolation='bilinear')
-            # plt.axis("off")
-            # plt.show()
-            # st.pyplot(fig)
-            # st.set_option('deprecation.showPyplotGlobalUse', False)
+
             hotel_subset = df_all.loc[df_all['Hotel']==row_dict['Hotel'].values[0]]
             hotel_sub = summary_hotel.loc[summary_hotel['Hotel']==row_dict['Hotel'].values[0]]
             st.caption("Review Summary:")
@@ -277,47 +270,6 @@ def main():
             for score, idx in zip(top_results_h[0], top_results_h[1]):
                 st.write(corpus_h[idx])
 
-            # st.table(hotel_subset.head())
-
-            # st.write("#")
-            #wordcloud = WordCloud(width = 3000, height = 2000, random_state=1, background_color='navy', colormap='rainbow', collocations=False, stopwords = STOPWORDS, mask=mask).generate(corpus[idx])
-            # wordcloud = WordCloud(collocations=False,stopwords=stopwords,background_color='black',max_words=35).generate(corpus[idx])
-            # fig, ax = plt.subplots()
-            # plt.imshow(wordcloud, interpolation='bilinear')
-            # plt.axis("off")
-            # plt.show()
-            # st.pyplot(fig)
-            # st.set_option('deprecation.showPyplotGlobalUse', False)
-
 
 if __name__ == '__main__':
     main()
-
-
-    # cos_scores = util.pytorch_cos_sim(query_embedding, sentence_embeddings)[0]
-    # top_results = torch.topk(cos_scores, k=top_k)
-
-    # st.write("\n\n======================\n\n")
-    # st.write("Query:", query)
-    # st.write("\nTop 5 most similar sentences in corpus using sentence embedding:")
-    #
-    # for score, idx in zip(top_results[0], top_results[1]):
-    #     st.write("(Score: {:.4f})".format(score))
-    #     row_dict = df.loc[df['all_review']== corpus[idx]]
-    #     st.write("paper_id:  " , row_dict['hotel_name'] , "\n")
-    #     #wordcloud = WordCloud(width = 3000, height = 2000, random_state=1, background_color='navy', colormap='rainbow', collocations=False, stopwords = STOPWORDS, mask=mask).generate(corpus[idx])
-    #     wordcloud = WordCloud(collocations=False,stopwords=stopwords,background_color='black',max_words=35).generate(corpus[idx])
-    #     fig, ax = plt.subplots()
-    #     plt.imshow(wordcloud, interpolation='bilinear')
-    #     plt.axis("off")
-    #     plt.show()
-    #     st.pyplot(fig)
-    #     st.set_option('deprecation.showPyplotGlobalUse', False)
-
-
-# embedder = SentenceTransformer('all-MiniLM-L6-v2')
-#
-# corpus_embeddings = embedder.encode(corpus, convert_to_tensor=True)
-
-
-# Find the closest 5 sentences of the corpus for each query sentence based on cosine similarity
