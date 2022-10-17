@@ -94,7 +94,7 @@ def main():
 
         st.write(
             """
-    -   This app allows you to search for hotels based on what you're looking for, rather than just cities - it helps with reducing time to go through exhaustive reviews for each hotel!
+    -   Travelle is a hotel search engine that allows users to enter free text query to make the search result personalized to user preference as opposed to other travel websites where a user has to spend hours going through hotel list. We use natural language processing and big data to return results customized for your preferences. A user can enter just about anything and we will narrow the results to what closely matches your requirements. For e.g. a user can enter a query like "Hotel near the Eiffel and cheaper than $300 per night with free breakfast" and we will find the closest results
     -   It uses an innovative semantic search approach that leverages multiple NLP embeddings and relies on [Transformers] (https://huggingface.co/transformers/) 🤗.
     	    """
         )
