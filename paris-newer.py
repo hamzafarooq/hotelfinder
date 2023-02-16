@@ -119,8 +119,8 @@ def main():
 
 
     df_combined = df_all.sort_values(['Hotel']).groupby('Hotel', sort=False).text.apply(''.join).reset_index(name='all_review')
-
-
+    df_combined_paris_summary = pd.read_csv('df_combined_paris.csv')
+    df_combined_paris_summary = df_combined_paris_summary[['Hotel','summary']]
 
     import re
 
@@ -131,6 +131,7 @@ def main():
 
     df_combined['all_review']= df_combined['all_review'].apply(lambda x: lower_case(x))
     df_basic = df_all[['Hotel','description','price_per_night']].drop_duplicates()
+    df_basic = df_basic.merge(df_combined_paris_summary,how='left')
     df_combined_e = df_combined.merge(df_basic)
     df_combined_e['all_review'] =df_combined_e['description']+ df_combined_e['all_review'] + df_combined_e['price_per_night']
 
@@ -205,7 +206,13 @@ def main():
             st.subheader(row_dict['Hotel'].values[0])
             de = df_basic.loc[df_basic.Hotel == row_dict['Hotel'].values[0]]
             st.write(f'\tPrice Per night: {de.price_per_night.values[0]}')
+            st.write('Description:')
             st.expander(de.description.values[0],expanded=False)
+            # try:
+            #     st.write('Summary')
+            #     st.expander(de.summary.values[0],expanded=False)
+            # except:
+            #     None
             # doc = corpus[hit['corpus_id']]
             # kp.get_key_phrases(doc)
 
@@ -237,7 +244,13 @@ def main():
             st.subheader(row_dict['Hotel'].values[0])
             de = df_basic.loc[df_basic.Hotel == row_dict['Hotel'].values[0]]
             st.write(f'\tPrice Per night: {de.price_per_night.values[0]}')
+            st.write('Description:')
             st.expander(de.description.values[0])
+            # try:
+            #     st.write('Summary')
+            #     st.expander(de.summary.values[0],expanded=False)
+            # except:
+            #     None
 
         # Output of top-5 hits from re-ranker
         st.write("\n-------------------------\n")
@@ -249,7 +262,13 @@ def main():
             st.subheader(row_dict['Hotel'].values[0])
             de = df_basic.loc[df_basic.Hotel == row_dict['Hotel'].values[0]]
             st.write(f'\tPrice Per night: {de.price_per_night.values[0]}')
+            st.write('Description:')
             st.expander(de.description.values[0])
+            # try:
+            #     st.write('Summary')
+            #     st.expander(de.summary.values[0],expanded=False)
+            # except:
+            #     None
 
 
 

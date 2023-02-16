@@ -167,7 +167,7 @@ def main():
     #
     corpus = df_sentences_list
     # corpus_embeddings = embedder.encode(corpus,show_progress_bar=True)
-    corpus_embeddings = np.load('embeddings.npy')
+    corpus_embeddings = np.load('embeddings_review.npy')
     corpus_embeddings_h = np.load('embeddings_h_r.npy')
     #
     # model = SentenceTransformer('all-MiniLM-L6-v2')
